@@ -18,6 +18,7 @@ import warnings
 # warnings.filterwarnings("ignore", category=UserWarning)  # 忽略 UserWarning
 # 来自timm忽略
 warnings.filterwarnings("ignore", message=".*timm.*")
+from FocalLoss import FocalLoss1
 
 # 数据预处理
 data_transforms = {
@@ -55,7 +56,8 @@ from starnet import starnet_s1
 model = starnet_s1(pretrained=False, num_classes=len(class_names))
 
 # 定义损失函数和优化器
-criterion = nn.CrossEntropyLoss()
+# criterion = nn.CrossEntropyLoss()
+criterion = FocalLoss1()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # 训练和验证函数
